@@ -89,13 +89,13 @@ describe("Strategy Positive Scenarios", () => {
 	});
 
 	it("should check if jwtVerify function exists", () => {
-		const jwtVerify = app.__get__("jwtVerify");
-		expect(jwtVerify).to.be.a("function");
+		const verifyJwt = app.__get__("verifyJwt");
+		expect(verifyJwt).to.be.a("function");
 	});
 
 	it("should check if configurationIsCorrect function exists", () => {
-		const configurationIsCorrect = app.__get__("configurationIsCorrect");
-		expect(configurationIsCorrect).to.be.a("function");
+		const isConfigurationCorrect = app.__get__("isConfigurationCorrect");
+		expect(isConfigurationCorrect).to.be.a("function");
 	});
 
 	it("should check if Validate function exists", () => {
@@ -103,25 +103,28 @@ describe("Strategy Positive Scenarios", () => {
 		expect(strategy.validate).to.be.a("function");
 	});
 
-	it("should check if Strategy can initialized successfully", async () => {
+	it("should check if Strategy can initialized successfully", async (done) => {
 		strategy = new Strategy(strategyConfig);
 		await strategy.init(callback => {
 			expect(callback).to.eql(true);
+			done();
 		});
 	});
 
-	it("should check if Validate function can fail successfully when invalid token is passed", async () => {
+	it("should check if Validate function can fail successfully when invalid token is passed", async (done) => {
 		await strategy.init(callback => {
 			strategy.validate("token", function(err, response) {
 				expect(err).to.eql("Not a valid JWT token");
+				done();
 			});
 		});
 	});
 
-	it("should check if Validate function can execute successfully by detecting an expired token", async () => {
+	it("should check if Validate function can execute successfully by detecting an expired token", async (done) => {
 		await strategy.init(callback => {
 			strategy.validate(token, function(err, response) {
 				expect(err.name).to.eql("TokenExpiredError");
+				done();
 			});
 		});
 	});
