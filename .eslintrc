@@ -1,0 +1,32 @@
+{
+  "extends": [
+    "standard",
+    "prettier",
+    "prettier/standard"
+  ],
+  "plugins": [
+    "import",
+    "prettier",
+    "standard",
+    "jest"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2018
+  },
+  "env": {
+    "node": true,
+    "es6": true,
+    "jest": true,
+    "jest/globals": true
+  },
+  "rules": {
+    "space-before-function-paren": 0,
+    "new-cap": 0,
+    "prettier/prettier": 2,
+    "jest/no-disabled-tests": 1,
+    "jest/no-focused-tests": 2,
+    "jest/no-identical-title": 2,
+    "jest/prefer-to-have-length": 1,
+    "jest/valid-expect": 2
+  }
+}
